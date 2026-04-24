@@ -1,0 +1,21 @@
+# Key events that shaped internet adoption in Asia, Oceania, and the Pacific Rim
+# Each entry requires: name (string), year (int)
+# month is optional (int, 1–12)
+# Events outside the study period (2010–present) will be logged as warnings and omitted from charts.
+
+key_events:
+  - name: "Jio commercial launch"
+    year: 2016
+    month: 9
+
+  - name: "Palapa Ring completion"
+    year: 2019
+
+  - name: "Coral Sea Cable activation"
+    year: 2019
+
+  - name: "COVID-19 pandemic onset"
+    year: 2020
+
+  - name: "Starlink Asia-Pacific expansion"
+    year: 2022

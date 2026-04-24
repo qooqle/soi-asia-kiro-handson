@@ -1,0 +1,86 @@
+# Country scope for the Internet Adoption Analysis pipeline
+# 35 unique countries across Asia, Oceania, and the Pacific Rim
+# Grouped by sub-region for readability; the pipeline flattens this list before use.
+# All codes are ISO 3166-1 alpha-3.
+
+sub_regions:
+
+  East Asia:
+    - iso3: CHN
+      country_name: China
+    - iso3: JPN
+      country_name: Japan
+    - iso3: KOR
+      country_name: South Korea
+    - iso3: MNG
+      country_name: Mongolia
+    - iso3: TWN
+      country_name: Taiwan
+
+  Southeast Asia:
+    - iso3: BRN
+      country_name: Brunei
+    - iso3: IDN
+      country_name: Indonesia
+    - iso3: KHM
+      country_name: Cambodia
+    - iso3: LAO
+      country_name: Laos
+    - iso3: MMR
+      country_name: Myanmar
+    - iso3: MYS
+      country_name: Malaysia
+    - iso3: PHL
+      country_name: Philippines
+    - iso3: SGP
+      country_name: Singapore
+    - iso3: THA
+      country_name: Thailand
+    - iso3: TLS
+      country_name: Timor-Leste
+    - iso3: VNM
+      country_name: Vietnam
+
+  South Asia:
+    - iso3: BGD
+      country_name: Bangladesh
+    - iso3: IND
+      country_name: India
+    - iso3: LKA
+      country_name: Sri Lanka
+    - iso3: NPL
+      country_name: Nepal
+    - iso3: PAK
+      country_name: Pakistan
+
+  Oceania:
+    - iso3: AUS
+      country_name: Australia
+    - iso3: FJI
+      country_name: Fiji
+    - iso3: FSM
+      country_name: Micronesia (Fed. States)
+    - iso3: NZL
+      country_name: New Zealand
+    - iso3: PNG
+      country_name: Papua New Guinea
+    - iso3: SLB
+      country_name: Solomon Islands
+    - iso3: TON
+      country_name: Tonga
+    - iso3: VUT
+      country_name: Vanuatu
+    - iso3: WSM
+      country_name: Samoa
+
+  Pacific Rim Americas:
+    - iso3: CAN
+      country_name: Canada
+    - iso3: CHL
+      country_name: Chile
+    - iso3: MEX
+      country_name: Mexico
+    - iso3: PER
+      country_name: Peru
+    - iso3: USA
+      country_name: United States

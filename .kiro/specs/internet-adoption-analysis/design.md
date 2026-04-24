@@ -343,6 +343,7 @@ GET https://api.worldbank.org/v2/country/IND/indicator/NY.GDP.PCAP.KD
 
 - **Indicator code:** `IT_NET_USER_PP` ("Individuals using the Internet, % population")
 - **Bulk download endpoint:** `https://datahub.itu.int/data/?e=IT_NET_USER_PP&bu=0&d=WITS_CS`
+  - **Note (verified April 2025):** This URL returns a JavaScript-rendered HTML page, not a direct CSV. The ITU DataHub does not expose a public unauthenticated bulk CSV endpoint. The pipeline therefore uses the World Bank `IT.NET.USER.ZS` fallback for all country-years (Risk R2 materialised).
 - **Format:** CSV with columns `Country`, `ISO3`, `Year`, `Value`
 - **Fallback:** World Bank `IT.NET.USER.ZS` for any country-year absent from ITU data
 

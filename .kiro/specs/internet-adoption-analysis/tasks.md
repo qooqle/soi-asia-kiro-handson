@@ -26,25 +26,25 @@ printed summary) and should complete in under 10 minutes.
   - **Reviewable output:** `requirements.txt` printed to stdout
   - _Requirements: 10.1, 10.3_
 
-- [ ] 3. Write `environment.yml` for conda users
+- [x] 3. Write `environment.yml` for conda users
   - Mirror the same pinned versions from `requirements.txt` under `dependencies:`
   - Set `name: internet-adoption-analysis`
   - **Reviewable output:** `environment.yml` printed to stdout
   - _Requirements: 10.1_
 
-- [ ] 4. Write `config/countries.yaml` with 35 country entries
+- [x] 4. Write `config/countries.yaml` with 35 country entries
   - Use the sub-region grouping from the design (East Asia, Southeast Asia, South Asia,
     Oceania, Pacific Rim Americas) — exactly 35 unique ISO3 codes, no duplicates
   - **Reviewable output:** `config/countries.yaml` printed to stdout; confirm entry count = 35
   - _Requirements: 3.1, 3.2, 3.4_
 
-- [ ] 5. Write `config/key_events.yaml` with the five required events
+- [x] 5. Write `config/key_events.yaml` with the five required events
   - Include: Jio commercial launch (2016-09), Palapa Ring completion (2019), Coral Sea Cable
     activation (2019), COVID-19 pandemic onset (2020), Starlink Asia-Pacific expansion (2022)
   - **Reviewable output:** `config/key_events.yaml` printed to stdout
   - _Requirements: 8.2, 8.3_
 
-- [ ] 6. Write `src/utils/config_loader.py`
+- [x] 6. Write `src/utils/config_loader.py`
   - Implement `load_countries(path)` — flattens sub-regions, validates ISO3 codes via
     `pycountry`, raises `ConfigError` if count < 30 or > 40 or any code is invalid
   - Implement `load_key_events(path)` — returns list of `{name, year, month?}` dicts
@@ -58,7 +58,7 @@ printed summary) and should complete in under 10 minutes.
     - Use `hypothesis` with `st.lists(iso3_codes, min_size=0, max_size=50)`
     - Tag: `# Feature: internet-adoption-analysis, Property 5: Country Count Validation`
 
-- [ ] 7. Write `src/utils/http_client.py`
+- [x] 7. Write `src/utils/http_client.py`
   - Implement `get_with_retry(url, params, timeout=30, max_attempts=3)` using `tenacity`
   - Retry on HTTP 5xx and connection timeouts with back-off delays of 1 s, 2 s, 4 s
   - Do not retry on HTTP 4xx; log error and return immediately
@@ -72,7 +72,7 @@ printed summary) and should complete in under 10 minutes.
     - Use `hypothesis` with `st.integers(min_value=1, max_value=5)` and a mock HTTP adapter
     - Tag: `# Feature: internet-adoption-analysis, Property 3: Retry Behaviour Under Failure`
 
-- [ ] 8. Write `Makefile` with phony targets
+- [x] 8. Write `Makefile` with phony targets
   - Targets: `all`, `acquire`, `clean` (data cleaning step), `visualize`, `cluster`,
     `annotate`, `report`, `test`, `clean-outputs` (removes `outputs/` and `data/processed/`)
   - `all` depends on `acquire → clean → visualize cluster annotate → report`
@@ -80,7 +80,7 @@ printed summary) and should complete in under 10 minutes.
   - **Reviewable output:** run `make --dry-run all` and confirm the dependency chain is printed correctly
   - _Requirements: 10.2_
 
-- [ ] 9. Checkpoint — scaffolding complete
+- [x] 9. Checkpoint — scaffolding complete
   - Run `python -m pytest tests/ -q --tb=short` (tests directory may be empty; confirm no import errors)
   - Confirm all directories exist and config files load without errors
   - Ensure all tests pass; ask the user if questions arise before proceeding to Phase 2
@@ -89,7 +89,7 @@ printed summary) and should complete in under 10 minutes.
 
 ### Phase 2 — Data Acquisition
 
-- [ ] 10. Write `src/acquire_worldbank.py` — indicator loop and file saving
+- [x] 10. Write `src/acquire_worldbank.py` — indicator loop and file saving
   - Load country list via `config_loader`; map ISO3 → ISO2 using `pycountry`
   - For each of the five WB indicator codes, call the REST API v2 endpoint for all countries
     in a single paginated request (`per_page=500`); save raw JSON to `data/raw/wb_{indicator}.json`
@@ -110,7 +110,7 @@ printed summary) and should complete in under 10 minutes.
     - Use `hypothesis` with `st.binary()` for response bodies
     - Tag: `# Feature: internet-adoption-analysis, Property 2: Raw Data Immutability`
 
-- [ ] 11. Write `src/acquire_itu.py` — ITU download, fallback, and provenance log
+- [x] 11. Write `src/acquire_itu.py` — ITU download, fallback, and provenance log
   - Download ITU bulk CSV from the configured endpoint; filter to Country_Scope and 2010–present
   - For each (iso3, year) absent from ITU data, fall back to `wb_IT.NET.USER.ZS.json`
   - Write `data/raw/itu_internet_use.csv` and `data/raw/provenance.csv`
@@ -124,7 +124,7 @@ printed summary) and should complete in under 10 minutes.
     - Use `hypothesis` with random sets of missing (iso3, year) pairs
     - Tag: `# Feature: internet-adoption-analysis, Property 4: Fallback and Provenance Completeness`
 
-- [ ] 12. Checkpoint — acquisition complete
+- [x] 12. Checkpoint — acquisition complete
   - Confirm `data/raw/` contains all expected files (5 WB JSON files, `itu_internet_use.csv`,
     `provenance.csv`)
   - Print file names and sizes in KB to stdout
@@ -134,13 +134,13 @@ printed summary) and should complete in under 10 minutes.
 
 ### Phase 3 — Data Cleaning and Panel Construction
 
-- [ ] 13. Write `src/utils/quality.py` — data-quality report helpers
+- [x] 13. Write `src/utils/quality.py` — data-quality report helpers
   - Implement `print_quality_report(df)` that prints: total row count, interpolated value
     count per country, and null count per indicator column
   - **Reviewable output:** call `print_quality_report` on a small synthetic DataFrame and confirm output format
   - _Requirements: 4.6_
 
-- [ ] 14. Write `src/clean.py` — merge, interpolate, and write panel
+- [x] 14. Write `src/clean.py` — merge, interpolate, and write panel
   - Load all raw files; merge on (iso3, year) into a single DataFrame with the schema from
     the design (`iso3`, `country_name`, `year`, `internet_penetration_pct`, `gdp_per_capita_usd`,
     `population`, `urban_pop_share_pct`, `broadband_per_100`, `internet_pct_interpolated`)
@@ -165,7 +165,7 @@ printed summary) and should complete in under 10 minutes.
     - Use `hypothesis` with time series containing gaps of random length (1–10)
     - Tag: `# Feature: internet-adoption-analysis, Property 7: Interpolation Correctness`
 
-- [ ] 15. Checkpoint — panel construction complete
+- [x] 15. Checkpoint — panel construction complete
   - Confirm `data/processed/panel_dataset.csv` exists; print row count, column names, and
     null rate for `internet_penetration_pct` (must be ≤ 10%)
   - Ensure all tests pass; ask the user if questions arise before proceeding to Phase 4
@@ -174,7 +174,7 @@ printed summary) and should complete in under 10 minutes.
 
 ### Phase 4 — Visualization and Analysis
 
-- [ ] 16. Write `src/viz_gdp.py` — GDP vs. internet penetration scatter plot
+- [x] 16. Write `src/viz_gdp.py` — GDP vs. internet penetration scatter plot
   - X-axis: `gdp_per_capita_usd` (log scale); Y-axis: `internet_penetration_pct` (0–100%)
   - Colour each point by country; size proportional to `population`
   - Add OLS regression line with 95% CI band using `seaborn.regplot`
@@ -184,7 +184,7 @@ printed summary) and should complete in under 10 minutes.
   - **Reviewable output:** `outputs/gdp_vs_internet.png` written; print file size in KB
   - _Requirements: 5.1, 5.2, 5.3, 5.4, 5.5, 5.6_
 
-- [ ] 17. Write `src/viz_trends.py` — small-multiples per-country trend lines
+- [x] 17. Write `src/viz_trends.py` — small-multiples per-country trend lines
   - One subplot per country; Y-axis `internet_penetration_pct` 0–100% (consistent across all panels);
     X-axis: year
   - Arrange panels in a grid (e.g., 6 × 6 for 35 countries); label each panel with country name
@@ -192,7 +192,7 @@ printed summary) and should complete in under 10 minutes.
   - **Reviewable output:** `outputs/country_trends.png` written; print file size in KB
   - _Requirements: 6.1, 6.2, 6.3_
 
-- [ ] 18. Write `src/cluster.py` — k-means clustering, PCA plot, and summary CSV
+- [x] 18. Write `src/cluster.py` — k-means clustering, PCA plot, and summary CSV
   - Compute per-country feature vector: `penetration_2010`, `penetration_latest`,
     `mean_annual_growth`, `year_crossed_50pct` (impute NaN with sentinel 2030)
   - Standardise with `StandardScaler`; run k-means for k ∈ {4, 5}; select k by silhouette score
@@ -220,7 +220,7 @@ printed summary) and should complete in under 10 minutes.
     - Use `hypothesis` with feature matrices of known cluster structure
     - Tag: `# Feature: internet-adoption-analysis, Property 9: Silhouette-Based k Selection`
 
-- [ ] 19. Write `src/annotate_timeline.py` — population-weighted regional trend with event annotations
+- [x] 19. Write `src/annotate_timeline.py` — population-weighted regional trend with event annotations
   - Compute population-weighted mean `internet_penetration_pct` per year across all countries
   - Load key events from `config/key_events.yaml`; draw a vertical dashed line and label for
     each event; skip events outside the study period with a logged warning
@@ -236,7 +236,7 @@ printed summary) and should complete in under 10 minutes.
     - Use `hypothesis` with random panel DataFrames containing population and penetration columns
     - Tag: `# Feature: internet-adoption-analysis, Property 10: Population-Weighted Mean Correctness`
 
-- [ ] 20. Checkpoint — visualization and analysis complete
+- [x] 20. Checkpoint — visualization and analysis complete
   - Confirm all four output images exist in `outputs/`; print each file name and size in KB
   - Confirm both cluster CSVs exist in their respective directories
   - Ensure all tests pass; ask the user if questions arise before proceeding to Phase 5
@@ -245,7 +245,7 @@ printed summary) and should complete in under 10 minutes.
 
 ### Phase 5 — Synthesis
 
-- [ ] 21. Write `src/report.py` — policy summary report generator
+- [x] 21. Write `src/report.py` — policy summary report generator
   - Read `panel_dataset.csv`, `cluster_assignments.csv`, and `config/key_events.yaml`
   - Generate `outputs/policy_summary.md` using string templates (no LLM dependency) with
     sections: Overview, Key Findings (one paragraph per cluster), Event Impacts, Data
@@ -255,12 +255,12 @@ printed summary) and should complete in under 10 minutes.
   - **Reviewable output:** print word count, section headings, and Flesch–Kincaid score to stdout
   - _Requirements: 9.1, 9.2, 9.3, 9.4, 9.5_
 
-- [ ] 22. Add final-pipeline summary to `Makefile` `report` target
+- [x] 22. Add final-pipeline summary to `Makefile` `report` target
   - After `report.py` completes, print a summary listing each output file and its size in KB
   - **Reviewable output:** run `make report` (or `make all`) and confirm the summary block is printed
   - _Requirements: 10.2, 10.4_
 
-- [ ] 23. Write reproducibility verification script `src/verify_outputs.py`
+- [x] 23. Write reproducibility verification script `src/verify_outputs.py`
   - Check that all five required output files exist: `gdp_vs_internet.png`,
     `country_trends.png`, `cluster_pca.png`, `annotated_timeline.png`, `policy_summary.md`
   - Verify each PNG meets 150 DPI minimum (read DPI metadata with `PIL`/`Pillow`)
@@ -271,7 +271,7 @@ printed summary) and should complete in under 10 minutes.
   - **Reviewable output:** run `python src/verify_outputs.py` and confirm all checks print PASS
   - _Requirements: 12.1, 12.2, 12.3, 12.5_
 
-- [ ] 24. Final checkpoint — full pipeline end-to-end
+- [x] 24. Final checkpoint — full pipeline end-to-end
   - Run `make all` (or equivalent) and confirm it completes without errors
   - Run `python src/verify_outputs.py` and confirm all checks pass
   - Run `python -m pytest tests/ -q --tb=short` and confirm all tests pass
