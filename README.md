@@ -8,7 +8,7 @@ It explores internet adoption trends across 35 countries in Asia, Oceania, and t
 
 You can also read the prompts used to generate this project with Kiro below.
 
-## Prompts
+## Prompts(Actually used)
 ### Requirements
 ```
 I want to build a data analysis project that explores the relationship between internet penetration, economic indicators, and demographic indicators across roughly 30–40 countries in Asia, Oceania, and the Pacific Rim from 2010 to the latest available year.
@@ -41,6 +41,43 @@ Propose a fix.
 If this reveals a gap in design.md, update the design first, then retry.
 ```
 
+
+## Prompts(You will use today, to make it simple)
+### Requirements
+```
+I want to build a simple data analysis pipeline that explores internet 
+penetration trends across 10–15 countries in Asia and Oceania from 2010 
+to the latest available year.
+
+Goals:
+1. Download internet penetration and GDP per capita data from the World Bank API.
+2. Clean and merge the data into a tidy country-year CSV.
+3. Visualize each country's internet penetration trend over time as a line chart.
+
+Please generate requirements.md using user stories with EARS-style acceptance 
+criteria ("When X, the system shall Y"). Cover data acquisition, cleaning, 
+and visualization only. Include a simple reproducibility requirement (requirements.txt 
+and a Makefile). Keep the scope small and beginner-friendly.
+Do not start implementation yet. Just produce requirements.md for my review.
+```
+
+### Design
+```
+Requirements look good. Now generate design.md based on requirements.md.
+Include: the target country list with ISO3 codes; the World Bank indicator 
+codes to use; the processing pipeline as a simple step-by-step diagram; 
+the directory layout; and library choices (keep dependencies minimal).
+Do not start implementation. Produce design.md for my review.
+```
+
+### Tasks
+```
+Let's begin executing tasks.md. Start with task 1.
+After completing it, show me what you produced and wait for my approval 
+before moving to the next task.
+
+If something goes wrong, paste the error message here and I'll help you fix it.
+```
 
 ## How to Start
 
